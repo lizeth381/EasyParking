@@ -1,4 +1,2 @@
-Empezando a subir archivos a GitHub clase de programación S65
-
-18-09-2021    11 am terminando el trabajo SQL y prácticando en GitHub
+La tabla padre USUARIO tiene todo el código bueno. Las demás tablas (Información Empresa, Registros y Plazas) estan en proceso, presentan aún algunos errores
 
