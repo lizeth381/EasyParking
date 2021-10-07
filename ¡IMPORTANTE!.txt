@@ -1,0 +1,2 @@
+La tabla padre USUARIO tiene todo el código bueno. Las demás tablas (Información Empresa, Registros y Plazas) estan en proceso, presentan aún algunos errores
+

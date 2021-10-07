@@ -4,6 +4,7 @@
 <%@page import="com.google.gson.Gson"%>
 
 <%ContrlUsuarios usuariosCtrl = new ContrlUsuarios();
+<<<<<<< HEAD
     String opcion = request.getParameter("opcion");
     if ("listar".equals(opcion)) {
         ArrayList<TOUsuario> usuarios = usuariosCtrl.consultarUsuario();
@@ -30,6 +31,18 @@
     }else {
         out.print("opcion valida");
     }
+=======
+String opcion= request.getParameter("opcion");
+if("listar".equals(opcion)){
+    ArrayList<TOUsuario>usuarios= usuariosCtrl.consultarUsuario();
+    out.print(new Gson().toJson(usuarios));
+    //out.print("estoy consultando la base de datos");
+}else{
+    out.print("opcion valida");
+}
+
+
+>>>>>>> c4ec623baf584a57fd7362f72f86b43a4112d902
 %>
 
 
