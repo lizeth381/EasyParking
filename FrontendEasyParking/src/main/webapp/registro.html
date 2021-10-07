@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    
+   
+    
+</head>
+<body style="align-content: center">
+    <form action="" class="form" id="form" onsubmit=""style="border: 1px solid rgb(20, 19, 19);margin: 20%;;
+    max-width: 80%;
+    background-color:#c7d7e9;
+    margin-top: 30px;
+    "><!--functionSubmit(event)-->
+        <h2 style="text-align: center;"> FORMULARIO DE REGISTRO</h2>
+        <div style="margin-left: 5%;" ng-app="registroVehiculos" ng-controller="testController as tc">
+            <label style="border: 1px solid rgb(20, 19, 19); width:40%; background-color: antiquewhite;">INGRESE ID </label><input id="idRegistro"  ng-model="tc.idUsuario"type="text" placeholder="ID" required
+        style="margin-left:2%; width: 5%;" >
+        <label style="border: 1px solid rgb(20, 19, 19); width:30%; background-color: antiquewhite;">PLACA </label><input id="placa" ng-model="tc.placaVehiculo" type="text" placeholder="PLACA" 
+        style="margin-left:2%; width: 12%;" >
+        <label style="border: 1px solid rgb(20, 19, 19); width:30%; background-color: antiquewhite;">FECHA-HORA </label><input id="fechaEntrada" ng-model="tc.fechaEntrada"  type="datetime-local" placeholder="FECHA-HORA" required
+        style="margin-left:2%" ><br><br>
+        
+        <label style="border: 1px solid rgb(20, 19, 19); width:30%; background-color: antiquewhite;">TIPO</label><select style="margin-left:2%; width: 20%;" name="tipo" ng-model="tc.tipoVehiculo" id="tipovehiculo" value="Gender"><br>
+            <option value="motocicleta">Motocicleta</option>
+            <option value="vehiculo">vehiculo</option>
+           
+        </select>
+        <label style="border: 1px solid rgb(20, 19, 19); width:30%; background-color: antiquewhite;"> PLAZA  </label><input id="plaza" ng-model="tc.idPlaza" type="text" placeholder="PLAZA" required
+        style="margin-left:2%;; width: 10%" ><br><br>
+                      
+        <button id="REGISTRAR" ng-click="tc.registrar" style="margin-bottom: 2%; background: rgb(160, 185, 233);">REGISTRAR</button>
+        <button id="CONSULTAR" ng-click="tc.Consultar" style="margin-bottom: 2%; background: rgb(160, 185, 233);">CONSULTAR</button><br>
+        <h2 style="text-align: center;"> FORMULARIO DE SALIDA</h2>
+        
+
+        <label style="border: 1px solid rgb(124, 113, 113); width: 30%; background-color: antiquewhite;">FECHA-SALIDA </label><input ng-model="tc.fechaSAlida" id="fechaSalida" type="datetime-local"  
+        style="margin-left:2%" >
+        <label style="border: 1px solid rgb(20, 19, 19); width:40%; background-color: antiquewhite;">TIEMPO TOTAL EN MINUTOS </label><input ng-model="tc.minutosTotales" id="minutosTotales" type="number"
+        style="margin-left:2%; width: 10%;" > <br><br>
+        <label style="border: 1px solid rgb(20, 19, 19); width:30%; background-color: antiquewhite;">FECHA-FACTURA </label><input ng-model="tc.fechaFactura" id="FECHA-FACTURA" type="datetime-local" 
+        style="margin-left:2%" ><br><br>
+        <label style="border: 1px solid rgb(20, 19, 19); width:40%; background-color: antiquewhite;">USUARIO</label><input ng-model="tc.nombreCliente" id="nombreCliente" type="text" placeholder="Nombres y Apellidos" 
+        style="margin-left:2%; width: 80%; text-align: center;" ><br><br>
+        <label style="border: 1px solid rgb(124, 113, 113); width: 30%; background-color: antiquewhite;">IVA TOTAL </label><input ng-model="tc.iva" id="iva" type="number"  
+        style="margin-left:2%" >
+        <label style="border: 1px solid rgb(124, 113, 113); width: 30%; background-color: rgb(202, 182, 229);">TOTAL CANCELAR </label><input ng-model="tc.totalCancelar" id="totalCancelar" type="number"  
+        style="margin-left:2%" ><br><br><br>
+
+
+        <button ng-click="tc.registrarSalida" id="registrarSalida" style="margin-bottom: 2%; background: rgb(160, 185, 233); width: 30%">REGISTRAR SALIDA</button>
+        <button ng-click="tc.generarFactura" id="generarFactura" style="margin-bottom: 2%; background: rgb(160, 185, 233);; width: 30%;margin-left: 2%;">GENERAR FACTURA</button>
+        <button ng-click="tc.limpiar" id="limpiar" style="margin-bottom: 2%; background: rgb(160, 185, 233); width: 30%;margin-left: 2%">LIMPIAR</button>
+    </div>
+    </form>
+    
+    <script src="plugins/common/common.min.js"></script>
+        <script src="js/custom.min.js"></script>
+        <script src="js/settings.js"></script>
+        <script src="js/gleek.js"></script>
+        <script src="js/styleSwitcher.js"></script>
+    
+</body>
+<script>
+    
+    var app =angular.module('registroVehiculos',[]);
+    app.controller('testController',['$http',initController]);
+    function initController($http){
+        var controlador=this;
+        
+        controlador.login=function(){//definiendo la funcion login
+            var parametros={opcion:"login",datos:JSON.stringify(controlador)};
+            $http({
+                    method: 'POST',
+                    url: 'http://localhost:8080/Easyparking/controler/ctrlRegistros.jsp',
+                    params: parametros                 
+           
+            
+        }).then(function(res){
+            controlador.respuesta=res.data;// un objeto de tipo JSON con la estructura de un ususarios
+            if(res.data.idUsuario===0){
+                alert("El usuario y o clave ingresados no son correctos, verificar clave");
+           /* }else if(res.data.idUsuario==2){
+                window.location.href="registro.html";
+            }else if(res.data.idUsuario==1){
+                window.location.href="por definir";
+            } */
+            }else {
+                window.location.href="registro.html";
+            }
+        });            
+            
+        }
+        
+    }
+
+</script>
+</html>
